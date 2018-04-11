@@ -1,9 +1,7 @@
-# hyperledger-single-organisation
-Hyperledger Composer business network to Hyperledger Fabric blockchain  for a single organization
 
-###Hyperledger Composer business network to Hyperledger Fabric blockchain  for a single organization
+Hyperledger Composer business network to Hyperledger Fabric blockchain  for a single organization
 ==
-***Step 1: Starting a Hyperledger Fabric network***==
+==***Step 1: Starting a Hyperledger Fabric network***==
 
 	/**
 	* Fresh Hyperledger fabric installation
@@ -26,10 +24,9 @@ Hyperledger Composer business network to Hyperledger Fabric blockchain  for a si
 	rm -fr ~/.composer
 	
 
-==
-***Step 2: Exploring the Hyperledger Fabric network***==	
+==***Step 2: Exploring the Hyperledger Fabric network***==	
 
-#####Configuration files - *cryptogen* and *configtxgen*
+Configuration files - *cryptogen* and *configtxgen*
 
 	/** Cryptogen file*/ 
 	~/fabric-tools/fabric-scripts/hlfv11/composer/crypto-config.yaml
@@ -38,14 +35,14 @@ Hyperledger Composer business network to Hyperledger Fabric blockchain  for a si
 	~/fabric-tools/fabric-scripts/hlfv11/composer/configtx.yaml
 
 
-^Only one organisation can interact in this network^
+Only one organisation can interact in this network
  
 -  Single organisation => Org1
 - Domain name => org1.example.com
 - Membership Services Provider (MSP) => Org1MSP
 
 
-#####Network components
+**Network components**
 The Hyperledger Fabric network is made up of several components:
 
 A single peer node for Org1, named peer0.org1.example.com.
@@ -60,7 +57,7 @@ The orderer port is 7050
 
 This runs in a Docker container. Hyperledger composer commands on the Docker host machine.
 
-#####Users
+**Users**
 - configured with a user (i.e. admin) named Admin@org1.example.com
 - permission to install the code for a blockchain business network onto their organization's peers
 
@@ -73,16 +70,14 @@ Certificate Authority for Org1 has been configured with admin user
 enrollment secret : adminpw**
 
 	
-#####Channel
+**Channel**
 
 composerchannel has been created with peer node peer0.org1.example.com
 
 >You can only deploy Hyperledger Composer blockchain business networks into existing channels, but you can create additional channels by following the Hyperledger Fabric documentation.
 >
 
-
-==
-***Step 3: Building a connection profile***==	
+==***Step 3: Building a connection profile***==
 
 
 	{
@@ -147,9 +142,7 @@ composerchannel has been created with peer node peer0.org1.example.com
     }
     
     
-==
-***Step 4: Locating the certificate and private key for the Hyperledger Fabric administrator
-***==	
+==***Step 4: Locating the certificate and private key for the Hyperledger Fabric administrator***==
 
 
 	~/fabric-tools/fabric-scripts/hlfv11/composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -158,9 +151,7 @@ composerchannel has been created with peer node peer0.org1.example.com
  public certificate :  signcerts subdirectory and is named Admin@org1.example.com-cert.pem
  private key to sign transactions : keystore subdirectory and named like this 114aab0e76bf0c78308f89efc4b8c9423e31568da0c340ca187a9b17aa9a4457_sk
  
- ==
-***Step 5: Creating a business network card for the Hyperledger Fabric administrator
-***==	
+ ==***Step 5: Creating a business network card for the Hyperledger Fabric administrator***==	
 
 >Business network card = connection profile + certificate + private key
 > run composer card create command to do it
@@ -176,10 +167,9 @@ composerchannel has been created with peer node peer0.org1.example.com
 	*/
 	
 	  
-==
-***Step 6: Locating the certificate and private key for the Hyperledger Fabric administrator
-***==
-#####Hyperledger Composer can only use business network cards that are placed into a wallet. The wallet is a directory on the file system that contains business network cards.
+==***Step 6: Locating the certificate and private key for the Hyperledger Fabric administrator***==
+
+Hyperledger Composer can only use business network cards that are placed into a wallet. The wallet is a directory on the file system that contains business network cards.
 
 	/**
 	command to import the business network card into the wallet
@@ -190,9 +180,7 @@ composerchannel has been created with peer node peer0.org1.example.com
 then follow hyperledger composer developer tutorials to generate **business network archive (.bna)**
 
   
-==
-***Step 7: Installing the Hyperledger Composer business network onto the Hyperledger Fabric peer nodes
-***==
+==***Step 7: Installing the Hyperledger Composer business network onto the Hyperledger Fabric peer nodes***==
 
 Hyperledger Fabric terms, the Hyperledger Composer runtime is a standard chaincode.
 
@@ -200,9 +188,7 @@ Install the Hyperledger Composer runtime onto all of the Hyperledger Fabric peer
 
 	composer network install -c PeerAdmin@fabric-network -a tutorial-network@0.0.1.bna
 
-==
-***Step 8: Starting the blockchain business network
-***==
+==***Step 8: Starting the blockchain business network***==
 Hyperledger Fabric terms, this is a chaincode instantiate operation.
 
 	composer network start --networkName tutorial-network --networkVersion 0.0.1 -A admin -S adminpw -c PeerAdmin@fabric-network
@@ -210,17 +196,13 @@ Hyperledger Fabric terms, this is a chaincode instantiate operation.
 	
 We can interact with this business network using the business network card file **admin@tutorial-network.card** that was created
 
-==
-***Step 9: Importing the business network card for the business network administrator
-***==
+==***Step 9: Importing the business network card for the business network administrator***==
 
 Import the business network card into the wallet and start interacting with the running blockchain business network
 
 	composer card import -f admin@tutorial-network.card
 
-==
-***Step 10: Testing the connection to the blockchain business network
-***==
+==***Step 10: Testing the connection to the blockchain business network***==
 Test the connection to the blockchain business network
 
 	composer network ping -c admin@tutorial-network
